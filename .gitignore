@@ -4,4 +4,4 @@
 pom.xml
 seaplusbot.iml
 
-Main.java
+src/main/java/Main.java
