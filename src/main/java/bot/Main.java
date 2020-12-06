@@ -1,3 +1,5 @@
+package bot;
+
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 
@@ -12,8 +14,7 @@ import javax.security.auth.login.LoginException;
  */
 public class Main {
     public static void main(String[] args) {
-        JDABuilder jdaBuilder = JDABuilder.createDefault(
-                "Nzg1MDI1NDQyNDczNDQzMzM4.X8x16g.Fuwhh8v2PoD6CyNqebWHHggoXcs");
+        JDABuilder jdaBuilder = JDABuilder.createDefault(Discord.getToken());
         JDA jda;
         try {
             jda = jdaBuilder.build();
