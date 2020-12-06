@@ -13,7 +13,7 @@ import javax.security.auth.login.LoginException;
 public class Main {
     public static void main(String[] args) {
         JDABuilder jdaBuilder = JDABuilder.createDefault(
-                "Nzg1MDI1NDQyNDczNDQzMzM4.X8x16g.9qK7QopSxCU-2m4GP01UGC3GUPE");
+                "Nzg1MDI1NDQyNDczNDQzMzM4.X8x16g.Fuwhh8v2PoD6CyNqebWHHggoXcs");
         JDA jda;
         try {
             jda = jdaBuilder.build();
