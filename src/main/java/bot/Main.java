@@ -15,7 +15,11 @@ import javax.security.auth.login.LoginException;
 public class Main {
     public static void main(String[] args) {
         JDABuilder jdaBuilder = JDABuilder.createDefault(Discord.getToken());
-        JDA jda;
+        JDA jda = null;
+
+        PingUser pingCmd = new PingUser();
+        jdaBuilder.addEventListeners(pingCmd);
+
         try {
             jda = jdaBuilder.build();
         } catch (LoginException le) {

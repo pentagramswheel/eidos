@@ -19,7 +19,7 @@ public class PingPong extends ListenerAdapter {
      */
     @Override
     public void onMessageReceived(MessageReceivedEvent e) {
-        if (e.getMessage().getContentRaw().equals("/ping")) {
+        if (e.getMessage().getContentRaw().equals("--ping")) {
             e.getChannel().sendMessage("pong!").queue();
         }
     }
