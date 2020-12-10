@@ -20,9 +20,9 @@ public class Introduction extends ListenerAdapter {
      */
     private String getIntro(MessageReceivedEvent e) {
         return String.format("Greetings %s. I am *Sea+ Bot*, the official bot "
-                + "of the Splatoon competitive team's (Sea+) Discord server. "
+                + "of the Splatoon competitive team's (Sea+) Discord server! "
                 + "If you would like a list of all of things I can do, run "
-                + " the `--help` command for more information. Thank you.",
+                + " the `--help` command for more information. Thank you!",
                 e.getMember().getEffectiveName());
     }
 
@@ -32,9 +32,9 @@ public class Introduction extends ListenerAdapter {
      */
     private String getHelpString() {
         return "`--help` - Displays the list of commands.\n"
-                + "`--ping [user] [amount]` - Pings a user a certain amount of times. \n"
-                + "`--coin toss [amount]` - Tosses a coin a certain amount of times. \n"
-                + "`--introduce` - Runs bot introduction. \n";
+                + "`--ping [user] [amount]` - Pings a user a certain amount of times.\n"
+                + "`--coin toss [amount]` - Tosses a coin a certain amount of times.\n"
+                + "`--introduce` - Runs bot introduction.\n";
     }
 
     /**

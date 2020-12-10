@@ -16,6 +16,9 @@ import java.util.regex.PatternSyntaxException;
  */
 public class CoinToss extends ListenerAdapter {
 
+    /** The maximum amount of times you can toss a coin.. */
+    private static final int MAX_TOSSES = 5;
+
     /**
      * Tosses a coin and outputs the result.
      * @param ch the channel to output the result to.
@@ -50,7 +53,7 @@ public class CoinToss extends ListenerAdapter {
             if (args[0].equals("--coin") && args[1].equals("toss")) {
                 flips = Integer.parseInt(args[2]);
 
-                if (flips > 5) {
+                if (flips > MAX_TOSSES) {
                     channel.sendMessage("You can only toss a coin "
                             + "best three out of five times.").queue();
                 } else {
