@@ -15,6 +15,9 @@ import java.util.regex.PatternSyntaxException;
  */
 public class PingUser extends ListenerAdapter {
 
+    /** The maximum amount of times you can ping someone. */
+    private static final int MAX_PINGS = 20;
+
     /**
      * Pings a user a certain amount of times.
      * @param userID the user to ping.
@@ -36,6 +39,7 @@ public class PingUser extends ListenerAdapter {
      * Note: Clean up later.
      */
     private boolean isValidID(String userID) {
+        System.out.println(userID);
         if (userID.equals("<@!297413857645953025>")
             || userID.equals("<@!130196093039411200>")
             || userID.equals("<@!440059670170959874>")
@@ -43,16 +47,16 @@ public class PingUser extends ListenerAdapter {
             || userID.equals("<@!208788589188743168>")
             || userID.equals("<@!447491971188260885>")
             || userID.equals("<@!724851006634197012>")
-            || userID.equals("<@!392856911562670085>")) {
+            || userID.equals("<@!392856911562670085>")
+            || userID.equals("<@!758734929247862804>")) {
             return true;
         }
         return false;
     }
 
     /**
-     * Tests the ping functionality by taking in a ping.
-     * @param e the ping to analyze. (Will only work in this case
-     *          if the ping is given by "/ping").
+     * Runs the ping command.
+     * @param e the command to analyze.
      */
     @Override
     public void onMessageReceived(MessageReceivedEvent e) {
@@ -70,10 +74,10 @@ public class PingUser extends ListenerAdapter {
                 id = args[1];
                 pings = Integer.parseInt(args[2]);
 
-                if (pings > 20) {
+                if (pings > MAX_PINGS) {
                     channel.sendMessage("If you ping them that much, had it "
-                            + "not been for the laws of these lands, they would "
-                            + "have slain you.").queue();
+                            + "not been for the laws of these lands, they "
+                            + "would have slain you.").queue();
                 } else if (isValidID(id)) {
                     ping(id, pings, channel);
                 } else {

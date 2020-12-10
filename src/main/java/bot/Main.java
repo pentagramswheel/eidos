@@ -1,5 +1,7 @@
 package bot;
 
+import bot.Engine.CoinToss;
+import bot.Engine.Introduction;
 import bot.Engine.PingUser;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -18,8 +20,13 @@ public class Main {
         JDABuilder jdaBuilder = JDABuilder.createDefault(Discord.getToken());
         JDA jda = null;
 
+        Introduction introCmd = new Introduction();
         PingUser pingCmd = new PingUser();
+        CoinToss coinCmd = new CoinToss();
+
+        jdaBuilder.addEventListeners(introCmd);
         jdaBuilder.addEventListeners(pingCmd);
+        jdaBuilder.addEventListeners(coinCmd);
 
         try {
             jda = jdaBuilder.build();
