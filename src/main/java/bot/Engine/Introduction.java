@@ -34,6 +34,7 @@ public class Introduction extends ListenerAdapter {
         return "`--help` - Displays the list of commands.\n"
                 + "`--ping [user] [amount]` - Pings a user a certain amount of times.\n"
                 + "`--coin toss [amount]` - Tosses a coin a certain amount of times.\n"
+                + "`--roll [amount]` - Rolls an amount-sided die, up to 2147483647 sides.\n"
                 + "`--introduce` - Runs bot introduction.\n";
     }
 

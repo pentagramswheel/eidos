@@ -1,6 +1,6 @@
 package bot;
 
-import bot.Engine.CoinToss;
+import bot.Engine.Chance;
 import bot.Engine.Introduction;
 import bot.Engine.PingUser;
 import net.dv8tion.jda.api.JDA;
@@ -22,11 +22,11 @@ public class Main {
 
         Introduction introCmd = new Introduction();
         PingUser pingCmd = new PingUser();
-        CoinToss coinCmd = new CoinToss();
+        Chance chanceCmds = new Chance();
 
         jdaBuilder.addEventListeners(introCmd);
         jdaBuilder.addEventListeners(pingCmd);
-        jdaBuilder.addEventListeners(coinCmd);
+        jdaBuilder.addEventListeners(chanceCmds);
 
         try {
             jda = jdaBuilder.build();

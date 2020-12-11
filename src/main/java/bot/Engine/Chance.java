@@ -11,10 +11,10 @@ import java.util.regex.PatternSyntaxException;
  * @author  Wil Aquino
  * Date:    December 9, 2020
  * Project: Sea+ Bot
- * Module:  CoinToss.java
- * Purpose: Tosses a coin.
+ * Module:  Chance.java
+ * Purpose: Contains chance-related commands.
  */
-public class CoinToss extends ListenerAdapter {
+public class Chance extends ListenerAdapter {
 
     /** The maximum amount of times you can toss a coin.. */
     private static final int MAX_TOSSES = 5;
@@ -35,7 +35,17 @@ public class CoinToss extends ListenerAdapter {
     }
 
     /**
-     *
+     * Rolls an n-sided die.
+     * @param n the amount of sides of the die.
+     * @param ch the channel to output the result to.
+     */
+    private void rollDie(int n, MessageChannel ch) {
+        Random rGen = new Random();
+        int roll = rGen.nextInt(n);
+        ch.sendMessage(Integer.toString(roll)).queue();
+    }
+
+    /**
      * Runs the coin toss command.
      * @param e the command to analyze.
      */
@@ -45,13 +55,12 @@ public class CoinToss extends ListenerAdapter {
         MessageChannel channel = e.getChannel();
 
         String[] args;
-        int flips;
 
         try {
             args = input.split(" ", 3);
 
             if (args[0].equals("--coin") && args[1].equals("toss")) {
-                flips = Integer.parseInt(args[2]);
+                int flips = Integer.parseInt(args[2]);
 
                 if (flips > MAX_TOSSES) {
                     channel.sendMessage("You can only toss a coin "
@@ -61,13 +70,20 @@ public class CoinToss extends ListenerAdapter {
                         tossCoin(channel);
                     }
                 }
+            } else if (args[0].equals("--roll")) {
+                if (args.length == 3) {
+                    throw new NumberFormatException();
+                }
+                int sides = Integer.parseInt(args[1]);
+
+                rollDie(sides, channel);
             }
         } catch (PatternSyntaxException pse) {
             channel.sendMessage("Invalid argument input.").queue();
         } catch (NumberFormatException
                 | ArrayIndexOutOfBoundsException exc) {
-            channel.sendMessage("Please specify how many times "
-                    + "to toss the coin.").queue();
+            channel.sendMessage("Invalid argument input. See `--help` "
+                    + "for more info.").queue();
         }
     }
 }

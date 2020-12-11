@@ -87,8 +87,8 @@ public class PingUser extends ListenerAdapter {
             channel.sendMessage("Invalid argument input.").queue();
         } catch (NumberFormatException
                 | ArrayIndexOutOfBoundsException exc) {
-            channel.sendMessage("Please specify a user to ping and how "
-                    + "many times to ping them.").queue();
+            channel.sendMessage("Invalid argument input. See `--help` "
+                    + "for more info.").queue();
         }
     }
 }
