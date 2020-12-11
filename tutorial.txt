@@ -1,0 +1,122 @@
+@author  Wil Aquino
+Date:    December 10, 2020
+Project: Sea+ Bot
+Purpose: To explain how implementing your Discord bot
+         works with Something.Host.
+
+This document thoroughly details how to get the bot working 24/7 using IntelliJ, the JDA
+package, Maven, and the bot hosting service, Something.Host. If IntelliJ is not being
+used, you can still follow this documentation; the Java version adjustment and
+dependencies just might differ slightly, but the MAIN GOAL is to get a working JAR file
+according to which Something.Host Java version you're working in.
+
+
+Something.Host (SH) bot management involves 4 main sections:
+- Console
+- File Manager
+- Remote Access
+- Configuration
+
+
+Before getting to these sections, the implementation must be implemented and packaged
+in order for the bot to be hosted in the first place. This process is detailed
+as follows:
+
+1. Start a Maven project under IntelliJ.
+
+2. Go to pom.xml, follow the JDA Maven dependencies, and also copy in the following:
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.package.MainClass</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <groupId>org.example</groupId>
+    <artifactId>Main</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>1.11</maven.compiler.source> <!---->
+        <maven.compiler.target>1.11</maven.compiler.target> <!---->
+    </properties>
+
+3. Begin implementing the bot, according to the JDA documentation!
+
+
+Now that our implementation is ready, we need to discuss the interactivity with SH. In order
+to package all of our implementation into one runnable application, it must be packaged into
+a JAR file for SH to run. At the time of this documentation, Configuration on SH only allows
+Java versions 1.8-1.12, but don't worry; if you wrote your code in a different version of Java,
+the transition process will be detailed here. Because of this setback, every time you want to
+update the code, the transition back to your version MUST be made, so be warned. The following
+changes must be made:
+
+1. pom.xml
+Reference the compiler source version conveniently specified by the <!----> comments in the
+dependency code above. Change the version according to your SH Java version.
+
+2. File > Project Structure > Project Settings > Project
+- Ensure project SDK is set to your SH Java version.
+- Ensure project language level is set to your SH Java version.
+
+3. File > Project Structure > Project Settings > Modules
+Language level should be set to your SH Java version.
+
+4. Settings > Build, Execution, Deployment > Java Compiler
+- Ensure project bytecode version is your SH Java version of "Same as language level"
+- Ensure target bytecode version of the bot is your SH Java version
+
+5. Finish the transition by using Maven to "Reimport All Maven Projects" or "Reload all Maven
+Projects."
+
+
+Now that we've made the adjustments, we are ready to create the JAR file. Follow this tutorial
+by JetBrains themselves to make the JAR file:
+https://www.jetbrains.com/help/idea/compiling-applications.html
+
+If some questions according to ^this process are made, the solutions are easily found online.
+
+Now that the packaging is done, it's time to upload your implementation to SH to get the bot
+working. Connect your Discord bot with SH and get its server running. In order to upload files,
+use a FTP client such as WinSCP (most reliable) and connect it with the SH server (See Remote Access).
+Once done, you can use WinSCP to upload your needed files to the server. Assuming everything has been
+working so far, the rest of this process all follows within your SH server.
+
+
+Everything specified from now on will be within your SH server (SomethingCP). Make sure all of
+the files you uploaded through WinSCP appear in the File Manager. Go to Configuration and set
+the Java version you're in (Make sure this corresponds with the transition process from earlier if
+you followed it!). The startup command will be as follows:
+
+java -jar [bot JAR path]
+
+The JAR path should correspond to the file path within File Manager.
+    e.g. bot/.../bot.jar
+
+Save the configuration in Console, Rebuild your server, and Start it. If everything has been
+followed so far, your web socket should have been established and the your JDA implementation
+should have successfully loaded.
+
+Congratulations; your bot is now working on SH! The server you established your bot in should now be
+online. If not; something went wrong. Have fun!

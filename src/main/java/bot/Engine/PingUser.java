@@ -39,7 +39,6 @@ public class PingUser extends ListenerAdapter {
      * Note: Clean up later.
      */
     private boolean isValidID(String userID) {
-        System.out.println(userID);
         if (userID.equals("<@!297413857645953025>")
             || userID.equals("<@!130196093039411200>")
             || userID.equals("<@!440059670170959874>")
