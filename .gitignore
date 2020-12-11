@@ -1,7 +1,15 @@
-.idea
-.target
+target/
+.idea/
 
-pom.xml
-seaplusbot.iml
+*.class
+*.jar
+*.war
+*.ear
+*.logs
+*.iml
+*.xml
+*.target
+.eclipse
 
-target/classes
+src/main/java/bot/Discord.java
+/out/
