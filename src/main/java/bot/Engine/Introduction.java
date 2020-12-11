@@ -19,7 +19,7 @@ public class Introduction extends ListenerAdapter {
      * @return the introduction string.
      */
     private String getIntro(MessageReceivedEvent e) {
-        return String.format("Greetings %s. I am *Sea+ Bot*, the official bot "
+        return String.format("Greetings %s. I am `Sea+ Bot`, the official bot "
                 + "of the Splatoon competitive team's (Sea+) Discord server! "
                 + "If you would like a list of all of things I can do, run "
                 + " the `--help` command for more information. Thank you!",
@@ -34,7 +34,7 @@ public class Introduction extends ListenerAdapter {
         return "`--help` - Displays the list of commands.\n"
                 + "`--ping [user] [amount]` - Pings a user a certain amount of times.\n"
                 + "`--coin toss [amount]` - Tosses a coin a certain amount of times.\n"
-                + "`--roll [amount]` - Rolls an amount-sided die, up to 2147483647 sides.\n"
+                + "`--roll [amount]` - Rolls an amount-sided die, up to `2147483647` sides.\n"
                 + "`--introduce` - Runs bot introduction.\n";
     }
 
