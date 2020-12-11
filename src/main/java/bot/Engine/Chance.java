@@ -77,8 +77,9 @@ public class Chance extends ListenerAdapter {
                 } else if (sides < 0) {
                     channel.sendMessage("Negative-sided die "
                             + "don't exist five-head.").queue();
+                } else {
+                    rollDie(sides, channel);
                 }
-                rollDie(sides, channel);
             }
         } catch (PatternSyntaxException pse) {
             channel.sendMessage("Invalid argument input.").queue();
