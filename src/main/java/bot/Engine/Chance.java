@@ -77,6 +77,8 @@ public class Chance extends ListenerAdapter {
                 } else if (sides < 0) {
                     channel.sendMessage("Negative-sided die "
                             + "don't exist five-head.").queue();
+                } else if (sides == 0) {
+                    channel.sendMessage("Why even bother rolling?").queue();
                 } else {
                     rollDie(sides, channel);
                 }
