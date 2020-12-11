@@ -95,7 +95,9 @@ Now that we've made the adjustments, we are ready to create the JAR file. Follow
 by JetBrains themselves to make the JAR file:
 https://www.jetbrains.com/help/idea/compiling-applications.html
 
-If some questions according to ^this process are made, the solutions are easily found online.
+If some questions according to ^this process are made, the solutions are easily found online. One
+popular problem was that the META-INF folder was in the wrong folder. If it is not already there,
+it should be moved to be under "resources".
 
 Now that the packaging is done, it's time to upload your implementation to SH to get the bot
 working. Connect your Discord bot with SH and get its server running. In order to upload files,

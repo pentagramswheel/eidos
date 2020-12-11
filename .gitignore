@@ -5,3 +5,4 @@ pom.xml
 seaplusbot.iml
 
 target/classes
+out/artifacts
