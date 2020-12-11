@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.Random;
+import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 /**
@@ -71,11 +72,13 @@ public class Chance extends ListenerAdapter {
                     }
                 }
             } else if (args[0].equals("--roll")) {
-                if (args.length == 3) {
-                    throw new NumberFormatException();
-                }
                 int sides = Integer.parseInt(args[1]);
-
+                if (args.length > 2) {
+                    throw new PatternSyntaxException(null, null, 2);
+                } else if (sides < 0) {
+                    channel.sendMessage("Negative-sided die "
+                            + "don't exist five-head.").queue();
+                }
                 rollDie(sides, channel);
             }
         } catch (PatternSyntaxException pse) {

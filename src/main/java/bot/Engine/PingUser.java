@@ -77,6 +77,9 @@ public class PingUser extends ListenerAdapter {
                     channel.sendMessage("If you ping them that much, had it "
                             + "not been for the laws of these lands, they "
                             + "would have slain you.").queue();
+                } else if (pings < 0) {
+                    channel.sendMessage("Why would you ping someone a "
+                            + "negative amount of times...").queue();
                 } else if (isValidID(id)) {
                     ping(id, pings, channel);
                 } else {
