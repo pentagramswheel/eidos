@@ -5,7 +5,6 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.Random;
-import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
 /**
@@ -47,7 +46,7 @@ public class Chance extends ListenerAdapter {
     }
 
     /**
-     * Runs the coin toss command.
+     * Runs the chance commands.
      * @param e the command to analyze.
      */
     @Override
