@@ -5,7 +5,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.PatternSyntaxException;
 
 /**
@@ -48,8 +48,7 @@ public class PingUser extends ListenerAdapter {
             args = input.split(" ", 3);
 
             if (args[0].equals("--ping")) {
-                ArrayList<Member> ids = (ArrayList<Member>)
-                        e.getMessage().getMentionedMembers();
+                List<Member> ids = e.getMessage().getMentionedMembers();
                 pings = Integer.parseInt(args[2]);
 
                 if (pings > MAX_PINGS) {
