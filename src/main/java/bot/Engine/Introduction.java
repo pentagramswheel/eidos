@@ -35,7 +35,17 @@ public class Introduction extends ListenerAdapter {
                 + "`--ping [user] [amount]` - Pings a user a certain amount of times.\n"
                 + "`--coin toss [amount]` - Tosses a coin a certain amount of times.\n"
                 + "`--roll [amount]` - Rolls an amount-sided die, up to `2147483647` sides.\n"
-                + "`--introduce` - Runs bot introduction.\n";
+                + "`--introduce` - Runs bot introduction.\n"
+                + "`--thankyou` - Thank the bot.";
+    }
+
+    /**
+     * Retrieves the thank you string.
+     * @param e the command to analyze.
+     * @return the thank you string.
+     */
+    private String getWelcome(MessageReceivedEvent e) {
+        return "You are very welcome master " + e.getMember().getEffectiveName() + ".";
     }
 
     /**
@@ -47,10 +57,16 @@ public class Introduction extends ListenerAdapter {
         String input = e.getMessage().getContentRaw();
         MessageChannel channel = e.getChannel();
 
-        if (input.equals("--introduce")) {
-            channel.sendMessage(getIntro(e)).queue();
-        } else if (input.equals("--help")) {
-            channel.sendMessage(getHelpString()).queue();
+        switch (input) {
+            case "--introduce":
+                channel.sendMessage(getIntro(e)).queue();
+                break;
+            case "--help":
+                channel.sendMessage(getHelpString()).queue();
+                break;
+            case "--thankyou":
+                channel.sendMessage(getWelcome(e)).queue();
+                break;
         }
     }
 }

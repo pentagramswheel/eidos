@@ -60,8 +60,12 @@ public class Chance extends ListenerAdapter {
             args = input.split(" ", 3);
 
             if (args[0].equals("--coin") && args[1].equals("toss")) {
-                int flips = Integer.parseInt(args[2]);
+                if (args.length == 2) {
+                    tossCoin(channel);
+                    return;
+                }
 
+                int flips = Integer.parseInt(args[2]);
                 if (flips > MAX_TOSSES) {
                     channel.sendMessage("You can only toss a coin "
                             + "best three out of five times.").queue();
