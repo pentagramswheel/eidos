@@ -1,12 +1,7 @@
 package bot.Engine;
 
 import net.dv8tion.jda.api.entities.Member;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
-
-import java.util.List;
-import java.util.regex.PatternSyntaxException;
 
 /**
  * @author  Wil Aquino
@@ -14,8 +9,9 @@ import java.util.regex.PatternSyntaxException;
  * Project: Sea+ Bot
  * Module:  PingUser.java
  * Purpose: Pings a user a certain amount of times.
+ * Usage:   --ping [user] [amount]
  */
-public class PingUser extends ListenerAdapter {
+public class PingUser implements Command {
 
     /** The maximum amount of times you can ping someone. */
     private static final int MAX_PINGS = 20;
@@ -34,42 +30,29 @@ public class PingUser extends ListenerAdapter {
 
     /**
      * Runs the ping command.
-     * @param e the command to analyze.
+     * @param inChannel the channel the command was sent in.
+     * @param outChannel the channel to output to, if it exists.
+     * @param user the user to attach to the command output, if they exist.
+     * @param args the arguments of the command, if they exist.
      */
     @Override
-    public void onMessageReceived(MessageReceivedEvent e) {
-        String input = e.getMessage().getContentRaw();
-        MessageChannel channel = e.getChannel();
-
-        String[] args;
-        int pings;
-
+    public void runCmd(MessageChannel inChannel, MessageChannel outChannel,
+                       Member user, String[] args) {
         try {
-            args = input.split(" ", 3);
+            int pings = Integer.parseInt(args[2]);
 
-            if (args[0].equals("--ping")) {
-                List<Member> ids = e.getMessage().getMentionedMembers();
-                pings = Integer.parseInt(args[2]);
-
-                if (pings > MAX_PINGS) {
-                    channel.sendMessage("If you ping them that much, had it "
-                            + "not been for the laws of these lands, they "
-                            + "would have slain you.").queue();
-                } else if (pings < 0) {
-                    channel.sendMessage("Why would you ping someone a "
-                            + "negative amount of times...").queue();
-                } else if (ids.size() == 1) {
-                    ping(ids.get(0), pings, channel);
-                } else {
-                    channel.sendMessage("You can only ping one valid "
-                            + "user!").queue();
-                }
+            if (pings > MAX_PINGS) {
+                inChannel.sendMessage("If you ping them that much, had it "
+                        + "not been for the laws of these lands, they "
+                        + "would have slain you.").queue();
+            } else if (pings < 0) {
+                inChannel.sendMessage("Why would you ping someone a "
+                        + "negative amount of times...").queue();
+            } else {
+                ping(user, pings, inChannel);
             }
-        } catch (PatternSyntaxException pse) {
-            channel.sendMessage("Invalid argument input.").queue();
-        } catch (NumberFormatException
-                | ArrayIndexOutOfBoundsException exc) {
-            channel.sendMessage("Invalid argument input. See `--help` "
+        } catch (NumberFormatException exc) {
+            inChannel.sendMessage("Invalid argument input. See `--help` "
                     + "for more info.").queue();
         }
     }

@@ -1,11 +1,9 @@
 package bot.Engine;
 
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.Random;
-import java.util.regex.PatternSyntaxException;
 
 /**
  * @author  Wil Aquino
@@ -14,84 +12,82 @@ import java.util.regex.PatternSyntaxException;
  * Module:  Chance.java
  * Purpose: Contains chance-related commands.
  */
-public class Chance extends ListenerAdapter {
+public class Chance implements Command {
 
     /** The maximum amount of times you can toss a coin.. */
     private static final int MAX_TOSSES = 5;
 
     /**
-     * Tosses a coin and outputs the result.
+     * Tosses a coin a certain amount of times and outputs the result.
      * @param ch the channel to output the result to.
+     * @param k the amount of times to toss the coin.
      */
-    private void tossCoin(MessageChannel ch) {
-        Random rGen = new Random();
-        int pick = rGen.nextInt(2);
+    private void tossCoin(MessageChannel ch, int k) {
+        for (int i = 0; i < k; i++) {
+            Random rGen = new Random();
+            int pick = rGen.nextInt(2);
 
-        if (pick == 0) {
-            ch.sendMessage("Heads!").queue();
-        } else {
-            ch.sendMessage("Tails!").queue();
+            if (pick == 0) {
+                ch.sendMessage("Heads!").queue();
+            } else {
+                ch.sendMessage("Tails!").queue();
+            }
         }
     }
 
     /**
      * Rolls an n-sided die.
-     * @param n the amount of sides of the die.
      * @param ch the channel to output the result to.
+     * @param n the amount of sides of the die.
      */
-    private void rollDie(int n, MessageChannel ch) {
+    private void rollDie(MessageChannel ch, int n) {
         Random rGen = new Random();
         int roll = rGen.nextInt(n);
         ch.sendMessage(Integer.toString(roll)).queue();
     }
 
     /**
-     * Runs the chance commands.
-     * @param e the command to analyze.
+     * Runs one of the chance commands.
+     * @param inChannel the channel the command was sent in.
+     * @param outChannel the channel to output to, if it exists.
+     * @param user the user to attach to the command output, if they exist.
+     * @param args the arguments of the command, if they exist.
      */
     @Override
-    public void onMessageReceived(MessageReceivedEvent e) {
-        String input = e.getMessage().getContentRaw();
-        MessageChannel channel = e.getChannel();
-
-        String[] args;
-
+    public void runCmd(MessageChannel inChannel, MessageChannel outChannel,
+                       Member user, String[] args) {
         try {
-            args = input.split(" ", 3);
-
             if (args[0].equals("--coin") && args[1].equals("toss")) {
                 if (args.length == 2) {
-                    tossCoin(channel);
+                    tossCoin(inChannel, 1);
                     return;
                 }
 
                 int flips = Integer.parseInt(args[2]);
                 if (flips > MAX_TOSSES) {
-                    channel.sendMessage("You can only toss a coin "
+                    inChannel.sendMessage("You can only toss a coin "
                             + "best three out of five times.").queue();
+                } else if (flips == 0) {
+                    inChannel.sendMessage("Why even bother tossing?").queue();
                 } else {
-                    for (int i = 0; i < flips; i++) {
-                        tossCoin(channel);
-                    }
+                    tossCoin(inChannel, flips);
                 }
             } else if (args[0].equals("--roll")) {
                 int sides = Integer.parseInt(args[1]);
-                if (args.length > 2) {
-                    throw new PatternSyntaxException(null, null, 2);
-                } else if (sides < 0) {
-                    channel.sendMessage("Negative-sided die "
+                if (sides < 0) {
+                    inChannel.sendMessage("Negative-sided die "
                             + "don't exist five-head.").queue();
                 } else if (sides == 0) {
-                    channel.sendMessage("Why even bother rolling?").queue();
+                    inChannel.sendMessage("Why even bother rolling?").queue();
                 } else {
-                    rollDie(sides, channel);
+                    rollDie(inChannel, sides);
                 }
+            } else {
+                throw new NumberFormatException("Command argument error.");
             }
-        } catch (PatternSyntaxException pse) {
-            channel.sendMessage("Invalid argument input.").queue();
         } catch (NumberFormatException
                 | ArrayIndexOutOfBoundsException exc) {
-            channel.sendMessage("Invalid argument input. See `--help` "
+            inChannel.sendMessage("Invalid argument input. See `--help` "
                     + "for more info.").queue();
         }
     }

@@ -9,6 +9,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
  * Project: Sea+ Bot
  * Module:  PingPong.java
  * Purpose: A class for testing ping functions of the bot.
+ *          (This class was just for initial testing)
  */
 public class PingPong extends ListenerAdapter {
 

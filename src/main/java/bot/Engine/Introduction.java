@@ -1,8 +1,7 @@
 package bot.Engine;
 
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageChannel;
-import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 /**
  * @author  Wil Aquino
@@ -10,20 +9,23 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
  * Project: Sea+ Bot
  * Module:  Introduction.java
  * Purpose: A module for introducing the bot and helping users.
+ * Usage:   --help
+ *          --introduce
+ *          --thankyou
  */
-public class Introduction extends ListenerAdapter {
+public class Introduction implements Command {
 
     /**
      * Retrieves the bot's introduction.
-     * @param e the command to analyze.
+     * @param user the user who sent the command.
      * @return the introduction string.
      */
-    private String getIntro(MessageReceivedEvent e) {
+    private String getIntro(Member user) {
         return String.format("Greetings %s. I am `Sea+ Bot`, the official bot "
                 + "of the Splatoon competitive team's (Sea+) Discord server! "
                 + "If you would like a list of all of things I can do, run "
                 + " the `--help` command for more information. Thank you!",
-                e.getMember().getEffectiveName());
+                user.getEffectiveName());
     }
 
     /**
@@ -41,31 +43,32 @@ public class Introduction extends ListenerAdapter {
 
     /**
      * Retrieves the thank you string.
-     * @param e the command to analyze.
+     * @param user the user who sent the command.
      * @return the thank you string.
      */
-    private String getWelcome(MessageReceivedEvent e) {
-        return "You are very welcome master " + e.getMember().getEffectiveName() + ".";
+    private String getWelcome(Member user) {
+        return "You are very welcome master " + user.getEffectiveName() + ".";
     }
 
     /**
-     * Runs the introduction command.
-     * @param e the command to analyze.
+     * Runs one of the introduction commands.
+     * @param inChannel the channel the command was sent in.
+     * @param outChannel the channel to output to, if it exists.
+     * @param user the user to attach to the command output, if they exist.
+     * @param args the arguments of the command, if they exist.
      */
     @Override
-    public void onMessageReceived(MessageReceivedEvent e) {
-        String input = e.getMessage().getContentRaw();
-        MessageChannel channel = e.getChannel();
-
-        switch (input) {
+    public void runCmd(MessageChannel inChannel, MessageChannel outChannel,
+                    Member user, String[] args) {
+        switch (args[0]) {
             case "--introduce":
-                channel.sendMessage(getIntro(e)).queue();
+                inChannel.sendMessage(getIntro(user)).queue();
                 break;
             case "--help":
-                channel.sendMessage(getHelpString()).queue();
+                inChannel.sendMessage(getHelpString()).queue();
                 break;
             case "--thankyou":
-                channel.sendMessage(getWelcome(e)).queue();
+                inChannel.sendMessage(getWelcome(user)).queue();
                 break;
         }
     }

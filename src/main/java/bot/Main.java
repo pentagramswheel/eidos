@@ -1,8 +1,5 @@
 package bot;
 
-import bot.Engine.Chance;
-import bot.Engine.Introduction;
-import bot.Engine.PingUser;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 
@@ -17,19 +14,13 @@ import javax.security.auth.login.LoginException;
  */
 public class Main {
     public static void main(String[] args) {
-        JDABuilder jdaBuilder = JDABuilder.createDefault(Discord.getToken());
+        Events.bot = JDABuilder.createDefault(Discord.getToken());
         JDA jda = null;
 
-        Introduction introCmd = new Introduction();
-        PingUser pingCmd = new PingUser();
-        Chance chanceCmds = new Chance();
-
-        jdaBuilder.addEventListeners(introCmd);
-        jdaBuilder.addEventListeners(pingCmd);
-        jdaBuilder.addEventListeners(chanceCmds);
+        Events.bot.addEventListeners(new Events());
 
         try {
-            jda = jdaBuilder.build();
+            jda = Events.bot.build();
         } catch (LoginException le) {
             le.printStackTrace();
         }
