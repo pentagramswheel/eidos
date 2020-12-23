@@ -12,4 +12,4 @@ target/
 .eclipse
 
 src/main/java/bot/Discord.java
-/out/
+src/main/java/bot/Engine/User/*.txt
