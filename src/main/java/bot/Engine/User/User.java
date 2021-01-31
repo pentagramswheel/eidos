@@ -3,7 +3,7 @@ package bot.Engine.User;
 /**
  * @author  Wil Aquino
  * Date:    December 18, 2020
- * Project: Sea+ Bot
+ * Project: Eidos Bot
  * Module:  User.java
  * Purpose: Storage class for user data.
  */

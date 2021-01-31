@@ -3,7 +3,10 @@ package bot;
 import bot.Engine.Chance;
 import bot.Engine.Introduction;
 import bot.Engine.PingUser;
+import bot.Engine.User.UserInfo;
+
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -14,7 +17,7 @@ import java.util.List;
 /**
  * @author  Wil Aquino
  * Date:    December 5, 2020
- * Project: Sea+ Bot
+ * Project: Eidos Bot
  * Module:  Events.java
  * Purpose: Builds the bot by adding commands and analyzing user input.
  * Usages:  See getHelpString() within Introduction class for more
@@ -47,6 +50,19 @@ public class Events extends ListenerAdapter {
     private void runIntroCmd(Member user, MessageChannel ch, String[] args) {
         Introduction intro = new Introduction();
         intro.runCmd(ch, null, user, args);
+    }
+
+    /**
+     * Runs the "--profile" command.
+     * @param user the user who sent the command.
+     * @param inChannel the channel the command was ran in.
+     * @param outChannel the channel to output to, if needed.
+     * @param args the arguments of the command.
+     */
+    private void runProfileCmd(Member user, MessageChannel inChannel,
+                               MessageChannel outChannel, String[] args) {
+        UserInfo ui = new UserInfo();
+        ui.runCmd(inChannel, outChannel, user, args);
     }
 
     /**
@@ -90,6 +106,12 @@ public class Events extends ListenerAdapter {
                 checkArgs(channel, args, 1);
                 runIntroCmd(null, channel, args);
                 break;
+            case "--profile":
+                checkArgs(channel, args, 3);
+                MessageChannel announcements =
+                        e.getGuild().getTextChannelsByName(
+                                "announcements",true).get(0);
+                runProfileCmd(e.getMember(), channel, announcements, args);
             case "--ping":
                 checkArgs(channel, args, 3);
                 List<Member> ids = e.getMessage().getMentionedMembers();

@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 /**
  * @author  Wil Aquino
  * Date:    December 5, 2020
- * Project: Sea+ Bot
+ * Project: Eidos Bot
  * Module:  PingUser.java
  * Purpose: Pings a user a certain amount of times.
  * Usage:   --ping [user] [amount]

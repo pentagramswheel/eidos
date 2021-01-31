@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  * @author  Wil Aquino
  * Date:    December 9, 2020
- * Project: Sea+ Bot
+ * Project: Eidos Bot
  * Module:  Chance.java
  * Purpose: Contains chance-related commands.
  */

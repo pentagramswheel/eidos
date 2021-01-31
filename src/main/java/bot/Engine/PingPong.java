@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 /**
  * @author  Wil Aquino
  * Date:    December 5, 2020
- * Project: Sea+ Bot
+ * Project: Eidos Bot
  * Module:  PingPong.java
  * Purpose: A class for testing ping functions of the bot.
  *          (This class was just for initial testing)

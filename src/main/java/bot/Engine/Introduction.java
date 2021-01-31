@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 /**
  * @author  Wil Aquino
  * Date:    December 5, 2020
- * Project: Sea+ Bot
+ * Project: Eidos Bot
  * Module:  Introduction.java
  * Purpose: A module for introducing the bot and helping users.
  * Usage:   --help
@@ -21,8 +21,8 @@ public class Introduction implements Command {
      * @return the introduction string.
      */
     private String getIntro(Member user) {
-        return String.format("Greetings %s. I am `Sea+ Bot`, the official bot "
-                + "of the Splatoon competitive team's (Sea+) Discord server! "
+        return String.format("Greetings %s. I am `Eidos Bot`, a bot created "
+                + "by PTW to allow access to convenient command features. "
                 + "If you would like a list of all of things I can do, run "
                 + " the `--help` command for more information. Thank you!",
                 user.getEffectiveName());

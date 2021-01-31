@@ -6,7 +6,7 @@ import net.dv8tion.jda.api.entities.MessageChannel;
 /**
  * @author  Wil Aquino
  * Date:    December 18, 2020
- * Project: Sea+ Bot
+ * Project: Eidos Bot
  * Module:  Command.java
  * Purpose: Template for command classes.
  */
