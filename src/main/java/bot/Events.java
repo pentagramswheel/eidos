@@ -119,6 +119,8 @@ public class Events extends ListenerAdapter {
                 break;
             case "--coin":
                 checkArgs(channel, args, 3);
+                runChanceCmd(channel, args);
+                break;
             case "--roll":
                 checkArgs(channel, args, 2);
                 runChanceCmd(channel, args);
