@@ -2,6 +2,7 @@ package bot;
 
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 
 import javax.security.auth.login.LoginException;
@@ -20,6 +21,10 @@ public class Main {
         JDA jda = null;
 
         Events.bot.addEventListeners(new Events());
+
+        String funMessage = "i like ya cut g";
+        jda.getPresence().setActivity(Activity.playing(
+                "--help | " + funMessage));
 
         try {
             jda = Events.bot.build();
