@@ -23,8 +23,8 @@ public class Introduction implements Command {
     private String getIntro(Member user) {
         return String.format("Greetings %s. I am `Eidos`, a bot created "
                 + "by PTW to allow access to convenient command-features. "
-                + "If you would like a list of all of things I can do, run "
-                + "the `--help` command for more information. Thank you!",
+                + "If you would like a list of all of the things I can do, "
+                + "run the `--help` command for more information. Thank you!",
                 user.getEffectiveName());
     }
 
