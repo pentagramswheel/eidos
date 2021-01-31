@@ -48,6 +48,8 @@ public class PingUser implements Command {
             } else if (pings < 0) {
                 inChannel.sendMessage("Why would you ping someone a "
                         + "negative amount of times...").queue();
+            } else if (pings == 0) {
+                inChannel.sendMessage("Congrats.").queue();
             } else {
                 ping(user, pings, inChannel);
             }

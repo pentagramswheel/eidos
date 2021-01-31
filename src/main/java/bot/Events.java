@@ -20,7 +20,7 @@ import java.util.List;
  * Project: Eidos Bot
  * Module:  Events.java
  * Purpose: Builds the bot by adding commands and analyzing user input.
- * Usages:  See getHelpString() within Introduction class for more
+ * Usages:  See getHelpString() within the Introduction class for more
  *          information.
  */
 public class Events extends ListenerAdapter {
