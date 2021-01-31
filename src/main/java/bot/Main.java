@@ -22,12 +22,12 @@ public class Main {
 
         Events.bot.addEventListeners(new Events());
 
-        String funMessage = "i like ya cut g";
-        jda.getPresence().setActivity(Activity.playing(
-                "--help | " + funMessage));
-
         try {
             jda = Events.bot.build();
+
+            String funMessage = "i like ya cut g";
+            jda.getPresence().setActivity(Activity.playing(
+                    "--help | " + funMessage));
         } catch (LoginException le) {
             le.printStackTrace();
         }
