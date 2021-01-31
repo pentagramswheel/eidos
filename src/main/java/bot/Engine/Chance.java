@@ -73,7 +73,7 @@ public class Chance implements Command {
                     tossCoin(inChannel, flips);
                 }
             } else if (args[0].equals("--roll")) {
-                int sides = Integer.parseInt(args[1]);
+                int sides = Integer.parseInt(args[1]) + 1;
                 if (sides < 0) {
                     inChannel.sendMessage("Negative-sided die "
                             + "don't exist five-head.").queue();
