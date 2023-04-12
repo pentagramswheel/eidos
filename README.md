@@ -1,6 +1,3 @@
-# eidosbot
-Implementation of PTW's Discord bot.
-
 # Eidos Documentation
 
 **Author(s):** <medium><a href='https://github.com/pentagramswheel'>Wil Aquino</a></medium>
